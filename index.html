@@ -2,26 +2,46 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro al Evento</title>
+  <title>Registro Evento Liberty</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="overlay">
-  <div class="card">
-    <img src="img/logo.png" class="logo" alt="Logo">
+  <div class="card fade-in">
+
+    <!-- Logo Liberty -->
+    <img src="img/logo.png" class="logo" alt="Liberty">
+
+    <!-- Imagen 25 años -->
+    <img src="img/25anos.png" class="aniversario" alt="25 años">
 
     <h1>Registro al Evento</h1>
-    <p>LIBERTY URUGUAY</p>
-    <p>Completá tus datos para confirmar asistencia</p>
+    <p class="subtitulo">Completá tus datos para confirmar asistencia</p>
+
+    <!-- Fecha y lugar -->
+    <div class="info-evento">
+      <p><i class="fa-solid fa-calendar-days"></i> 8 de mayo de 2026</p>
+      <p><i class="fa-solid fa-location-dot"></i> Cottage Carrasco - Miraflores 1360</p>
+    </div>
 
     <form>
       <input type="text" placeholder="Nombre completo" required>
       <input type="email" placeholder="Email" required>
       <input type="text" placeholder="Empresa">
 
-      <button type="submit">Confirmar asistencia</button>
+      <button type="submit">
+        <i class="fa-solid fa-check"></i> Confirmar asistencia
+      </button>
     </form>
+
   </div>
 </div>
 
