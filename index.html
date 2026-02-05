@@ -33,14 +33,16 @@
     </div>
 
     <form id="formRegistro">
-      <input type="text" id="nombre" placeholder="Nombre completo" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="text" id="empresa" placeholder="Empresa">
+      <input type="text" name="nombre" id="nombre" placeholder="Nombre completo" required>
+      <input type="email" name="email" id="email" placeholder="Email" required>
+      <input type="text" name="empresa" id="empresa" placeholder="Empresa">
 
       <button type="submit">
         <i class="fa-solid fa-check"></i> Confirmar asistencia
       </button>
     </form>
+
+    <div id="resultado"></div>
 
   </div>
 </div>
@@ -48,31 +50,27 @@
 <script>
 const form = document.getElementById("formRegistro");
 const card = document.getElementById("card");
+const resultado = document.getElementById("resultado");
 
 form.addEventListener("submit", function(e){
   e.preventDefault();
 
-  const nombre = document.getElementById("nombre").value;
-  const email = document.getElementById("email").value;
-  const empresa = document.getElementById("empresa").value;
-
-  fetch("https://script.google.com/macros/s/AKfycbxfFEu_0TMgu2MJNIEcij9fZhTTB234z3FFpl0HWvRomAnhteQUOy5Z6XrlL197NbfVNg/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyU89nXn4PHNt0Ce2oOtwKnxRQ3giPohWXgtAvHnqB64EQjPKzE9oG3Ijvu0SIiFNpz4w/exec", {
     method: "POST",
-    body: new URLSearchParams({
-      nombre: nombre,
-      email: email,
-      empresa: empresa
-    })
+    body: new FormData(form)
   })
-  .then(response => response.json())
-  .then(data => {
+  .then(res => res.text())   // leer como texto
+  .then(text => {
+    const data = JSON.parse(text);
+
+    // Mostrar pantalla de confirmación
     card.innerHTML = `
       <img src="img/logo.png" class="logo">
       <h2>✅ Registro confirmado</h2>
-      <p>Presentá este QR al ingresar al evento</p>
+      <p>Te enviamos tu QR por email</p>
       <img src="${data.qr}" width="200">
-      <p><strong>${nombre}</strong></p>
-      <p>${email}</p>
+      <p><strong>${document.getElementById("nombre").value}</strong></p>
+      <p>${document.getElementById("email").value}</p>
     `;
   })
   .catch(err => {
