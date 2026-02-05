@@ -1,75 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Registro Evento</title>
-<style>
-body {
-  font-family: Arial;
-  background:#f2f2f2;
-  padding:40px;
-}
-.container {
-  background:white;
-  padding:20px;
-  max-width:500px;
-  margin:auto;
-  border-radius:10px;
-  text-align:center;
-}
-input, button {
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-}
-button {
-  background:#007bff;
-  color:white;
-  border:none;
-  border-radius:5px;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>Evento Liberty</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h2>Registro al Evento</h2>
-  <p>Completá tus datos para registrarte</p>
+<div class="overlay">
+  <div class="card">
+    <img src="img/logo.png" class="logo">
 
-  <form id="registroForm">
-    <input type="text" name="nombre" placeholder="Nombre completo" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="text" name="empresa" placeholder="Empresa / Agencia">
-    <button type="submit">Registrarme</button>
-  </form>
+    <h1>Registro al Evento</h1>
+    <p>Completá tus datos para confirmar asistencia</p>
 
-  <div id="resultado"></div>
+    <form action="https://docs.google.com/forms/d/e/TU_FORM_ID/formResponse" method="POST" target="_blank">
+      <input type="text" name="entry.111111111" placeholder="Nombre completo" required>
+      <input type="email" name="entry.222222222" placeholder="Email" required>
+      <input type="text" name="entry.333333333" placeholder="Empresa">
+
+      <button type="submit">Confirmar asistencia</button>
+    </form>
+  </div>
 </div>
-
-<script>
-document.getElementById("registroForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  document.getElementById("resultado").innerHTML = "Registrando...";
-
-  fetch("URL_APPS_SCRIPT_AQUI", {
-    method: "POST",
-    body: new FormData(this)
-  })
-  .then(r => r.text())
-  .then(id => {
-    document.getElementById("resultado").innerHTML = `
-      <h3>¡Registro exitoso!</h3>
-      <p>Guardá este QR:</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${id}">
-    `;
-    this.reset();
-  })
-  .catch(err => {
-    document.getElementById("resultado").innerHTML = "Error al registrar";
-  });
-});
-</script>
 
 </body>
 </html>
