@@ -4,9 +4,11 @@
   box-sizing: border-box;
 }
 
+/* Fondo con imagen */
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #0b3c5d, #1d6fa5);
+  background: url("img/fondo.jpg") no-repeat center center fixed;
+  background-size: cover;
   height: 100vh;
 }
 
@@ -17,6 +19,7 @@ body {
   align-items: center;
 }
 
+/* Card */
 .card {
   background: white;
   padding: 30px 25px;
@@ -24,7 +27,7 @@ body {
   width: 90%;
   max-width: 420px;
   text-align: center;
-  box-shadow: 0 0 25px rgba(0,0,0,0.3);
+  box-shadow: 0 0 25px rgba(0,0,0,0.35);
 }
 
 /* Animación */
@@ -43,16 +46,16 @@ body {
   }
 }
 
-/* Logo */
+/* Logo Liberty MÁS GRANDE */
 .logo {
-  width: 120px;
-  margin-bottom: 10px;
+  width: 180px;   /* antes 120px */
+  margin-bottom: 8px;
 }
 
-/* Imagen 25 años */
+/* Imagen 25 años MÁS CHICA */
 .aniversario {
-  width: 180px;
-  margin: 15px 0;
+  width: 120px;   /* antes 180px */
+  margin: 10px 0;
 }
 
 /* Textos */
