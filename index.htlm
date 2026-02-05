@@ -15,6 +15,7 @@ body {
   max-width:500px;
   margin:auto;
   border-radius:10px;
+  text-align:center;
 }
 input, button {
   width:100%;
@@ -33,6 +34,7 @@ button {
 
 <div class="container">
   <h2>Registro al Evento</h2>
+  <p>Completá tus datos para registrarte</p>
 
   <form id="registroForm">
     <input type="text" name="nombre" placeholder="Nombre completo" required>
@@ -62,6 +64,9 @@ document.getElementById("registroForm").addEventListener("submit", function(e){
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${id}">
     `;
     this.reset();
+  })
+  .catch(err => {
+    document.getElementById("resultado").innerHTML = "Error al registrar";
   });
 });
 </script>
