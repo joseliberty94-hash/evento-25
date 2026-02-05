@@ -15,7 +15,7 @@
 <body>
 
 <div class="overlay">
-  <div class="card fade-in">
+  <div class="card fade-in" id="card">
 
     <!-- Logo Liberty -->
     <img src="img/logo.png" class="logo" alt="Liberty">
@@ -32,10 +32,10 @@
       <p><i class="fa-solid fa-location-dot"></i> Cottage Carrasco - Miraflores 1360</p>
     </div>
 
-    <form>
-      <input type="text" placeholder="Nombre completo" required>
-      <input type="email" placeholder="Email" required>
-      <input type="text" placeholder="Empresa">
+    <form id="formRegistro">
+      <input type="text" id="nombre" placeholder="Nombre completo" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="empresa" placeholder="Empresa">
 
       <button type="submit">
         <i class="fa-solid fa-check"></i> Confirmar asistencia
@@ -44,6 +44,43 @@
 
   </div>
 </div>
+
+<script>
+const form = document.getElementById("formRegistro");
+const card = document.getElementById("card");
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const email = document.getElementById("email").value;
+  const empresa = document.getElementById("empresa").value;
+
+  fetch("https://script.google.com/macros/s/AKfycbxfFEu_0TMgu2MJNIEcij9fZhTTB234z3FFpl0HWvRomAnhteQUOy5Z6XrlL197NbfVNg/exec", {
+    method: "POST",
+    body: new URLSearchParams({
+      nombre: nombre,
+      email: email,
+      empresa: empresa
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    card.innerHTML = `
+      <img src="img/logo.png" class="logo">
+      <h2>✅ Registro confirmado</h2>
+      <p>Presentá este QR al ingresar al evento</p>
+      <img src="${data.qr}" width="200">
+      <p><strong>${nombre}</strong></p>
+      <p>${email}</p>
+    `;
+  })
+  .catch(err => {
+    alert("Error al enviar datos");
+    console.error(err);
+  });
+});
+</script>
 
 </body>
 </html>
