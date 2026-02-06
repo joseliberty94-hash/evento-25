@@ -52,12 +52,6 @@ body {
   margin-bottom: 8px;
 }
 
-/* Imagen 25 años MÁS CHICA */
-.aniversario {
-  width: 120px;   /* antes 180px */
-  margin: 10px 0;
-}
-
 /* Textos */
 h1 {
   font-family: 'Montserrat', sans-serif;
