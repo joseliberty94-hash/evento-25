@@ -44,14 +44,14 @@
   </div>
 </div>
 
-<!-- Confetti -->
+<!-- Confetti library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
 <script>
 const form = document.getElementById("formRegistro");
 const card = document.getElementById("card");
 
-// Función confeti
+// Función para lanzar confeti
 function lanzarConfeti() {
   confetti({
     particleCount: 150,
@@ -59,14 +59,26 @@ function lanzarConfeti() {
     origin: { y: 0.6 }
   });
 
-  const duration = 3000;
+  const duration = 3 * 1000;
   const end = Date.now() + duration;
 
   (function frame() {
-    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }});
-    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }});
+    confetti({
+      particleCount: 5,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 5,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 }
+    });
 
-    if (Date.now() < end) requestAnimationFrame(frame);
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
   })();
 }
 
@@ -83,18 +95,11 @@ form.addEventListener("submit", function(e){
 
     card.innerHTML = `
       <img src="img/logo.png" class="logo">
-
       <h2>✅ Registro confirmado</h2>
       <p>Te enviamos tu QR por email</p>
-
       <img src="${data.qr}" width="200">
-
       <p><strong>${document.getElementById("nombre").value}</strong></p>
       <p>${document.getElementById("email").value}</p>
-
-      <a href="${data.pdf}" target="_blank" download class="btn-descargar">
-        <i class="fa-solid fa-file-pdf"></i> Descargar entrada (PDF)
-      </a>
     `;
 
     lanzarConfeti();
