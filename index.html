@@ -44,10 +44,45 @@
   </div>
 </div>
 
+<!-- Confetti library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
 <script>
 const form = document.getElementById("formRegistro");
 const card = document.getElementById("card");
-const resultado = document.getElementById("resultado");
+
+// Función para lanzar confeti
+function lanzarConfeti() {
+  // Explosión rápida
+  confetti({
+    particleCount: 150,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+
+  // Lluvia lenta por unos segundos
+  const duration = 3 * 1000; // 3 segundos
+  const end = Date.now() + duration;
+
+  (function frame() {
+    confetti({
+      particleCount: 5,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 5,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+}
 
 form.addEventListener("submit", function(e){
   e.preventDefault();
@@ -56,11 +91,11 @@ form.addEventListener("submit", function(e){
     method: "POST",
     body: new FormData(form)
   })
-  .then(res => res.text())   // leer como texto
+  .then(res => res.text())
   .then(text => {
     const data = JSON.parse(text);
 
-    // Mostrar pantalla de confirmación
+    // Mostrar pantalla de confirmación con QR
     card.innerHTML = `
       <img src="img/logo.png" class="logo">
       <h2>✅ Registro confirmado</h2>
@@ -69,6 +104,9 @@ form.addEventListener("submit", function(e){
       <p><strong>${document.getElementById("nombre").value}</strong></p>
       <p>${document.getElementById("email").value}</p>
     `;
+
+    // Llamamos al confeti después de mostrar la confirmación
+    lanzarConfeti();
   })
   .catch(err => {
     alert("Error al enviar datos");
